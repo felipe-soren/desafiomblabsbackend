@@ -25,9 +25,9 @@ class EventController {
   
   async store (req, res) {
 
-    const { organizer: _id, name } = req.body
+    const { organizer: name } = req.body
 
-    const user = await User.findOne({ _id })
+    const user = await User.findOne({ _id: req.userId })
 
     if (!user.isOrganizer){
       return res.status(400).json({ error: 'user is not organizer' })
@@ -37,7 +37,7 @@ class EventController {
       return res.status(400).json({error: 'event already exists'})
     }
 
-    let event = await Event.create(req.body)
+    let event = await Event.create({...req.body, organizer: req.userId})
 
     event = await event.populate('organizer').execPopulate()
 
