@@ -9,6 +9,10 @@ class EventController {
     if(req.query.title) {
       filters.name = new RegExp(req.query.title, 'i')
     }
+    if (req.query.city) {
+      filters.city = new RegExp(req.query.city, 'i')
+    }
+    console.log(filters)
     const events = await Event.paginate(filters, {
       page: req.query.page || 1,
       limit: 20,

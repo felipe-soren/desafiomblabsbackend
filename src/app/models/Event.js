@@ -6,9 +6,21 @@ const EventSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  location: {
+  description: {
     type: String,
     required: true
+  },
+    state: {
+      type: String,
+      required: true
+  },
+   city: {
+      type: String,
+      required: true
+    },
+    institute: {
+      type: String,
+      required: true
   },
   organizer: {
     type: mongoose.Schema.Types.ObjectId,
