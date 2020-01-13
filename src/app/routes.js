@@ -11,11 +11,11 @@ const AttendenceController = require('./controllers/AttendenceController')
 
 routes.post('/users', UserControler.store)
 routes.post('/login', LoginController.store)
+routes.get('/events', EventControler.index)
 
 routes.use(authMiddleaware)
 
 routes.post('/events', EventControler.store)
-routes.get('/events', EventControler.index)
 routes.get('/events/:id', EventControler.show)
 routes.delete('/events/:id', EventControler.destroy)
 routes.put('/events/:id', EventControler.update)
