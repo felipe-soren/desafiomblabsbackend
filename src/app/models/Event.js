@@ -36,6 +36,10 @@ const EventSchema = new mongoose.Schema({
     type: Number,
     required: true
   },
+  urlImage: {
+    type: String,
+    required: true
+  },
   date: {
     type: Date,
     required: true
