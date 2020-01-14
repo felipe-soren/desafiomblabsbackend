@@ -3,18 +3,24 @@ const Event = require('../models/Event')
 
 class AttendenceController {
   async store (req, res) {
-    const { attendant: participants } = req.body
-
-    let eventParticipants = await Event.find({ participants: {$in: participants} })
-    console.log(eventParticipants)
-
-    if (eventParticipants && eventParticipants.length) {
+    const { participants } = await Event.findById(req.params.eventId)
+    const { attendant } = req.body
+    let paticipantFounded = participants.find(participant => participant == attendant)
+    if (paticipantFounded) {
       return res.status(400).json({ error: 'already participating' })
     }
+    console.log(attendant)
 
-    const event = await Event.findOneAndUpdate(req.params.eventId, {$push:{participants}}, {
+    const event = await Event.findByIdAndUpdate(req.params.eventId, {$push:{participants: attendant}}, {
       new: true
     })
+    res.send(event)
+  }
+  
+  async destroy (req, res) {
+    const { attendant } = req.body
+    const event = await Event.findByIdAndUpdate( req.params.eventId , { $pull: { participants: attendant }}, {
+      new: true} )
     res.send(event)
   }
 }

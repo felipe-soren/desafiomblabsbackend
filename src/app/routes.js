@@ -21,5 +21,6 @@ routes.delete('/events/:id', EventControler.destroy)
 routes.put('/events/:id', EventControler.update)
 
 routes.post('/attendence/:eventId', AttendenceController.store)
+routes.delete('/attendence/:eventId', AttendenceController.destroy)
 
 module.exports = routes
