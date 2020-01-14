@@ -6,8 +6,9 @@ class AttendenceController {
     const { attendant: participants } = req.body
 
     let eventParticipants = await Event.find({ participants: {$in: participants} })
+    console.log(eventParticipants)
 
-    if (eventParticipants) {
+    if (eventParticipants && eventParticipants.length) {
       return res.status(400).json({ error: 'already participating' })
     }
 
