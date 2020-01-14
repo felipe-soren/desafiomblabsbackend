@@ -13,7 +13,7 @@ class LoginController {
     if (!await user.compareHash(password)) {
       return res.status(400).json({ error: 'Invalid password'})
     }
-    user = {id: user.id_, isOrganizer: user.isOrganizer}
+    user = {_id: user.id_, isOrganizer: user.isOrganizer}
     return res.json({ user , token: User.generateToken(user) })
   }
 }
