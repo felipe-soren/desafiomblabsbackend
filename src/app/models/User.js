@@ -18,6 +18,11 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  attendedEvents: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Event',
+    required: false
+  }],
   isOrganizer: {
     type: Boolean,
     required: true,

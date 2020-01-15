@@ -11,6 +11,8 @@ class AttendenceController {
     }
     console.log(attendant)
 
+    await User.findByIdAndUpdate(req.userId, {$push:{attendedEvents: req.params.eventId}})
+
     const event = await Event.findByIdAndUpdate(req.params.eventId, {$push:{participants: attendant}}, {
       new: true
     })
@@ -19,6 +21,10 @@ class AttendenceController {
   
   async destroy (req, res) {
     const { attendant } = req.body
+    const user = await User.findByIdAndUpdate(attendant, {$pull: {attendedEvents: req.params.eventId}}, {
+      new: true} )
+      console.log(user)
+
     const event = await Event.findByIdAndUpdate( req.params.eventId , { $pull: { participants: attendant }}, {
       new: true} )
     res.send(event)
