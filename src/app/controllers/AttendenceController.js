@@ -4,7 +4,7 @@ const Event = require('../models/Event')
 class AttendenceController {
   async store (req, res) {
     const { participants } = await Event.findById(req.params.eventId)
-    const { attendant } = req.body
+    const attendant = req.userId
     let paticipantFounded = participants.find(participant => participant == attendant)
     if (paticipantFounded) {
       return res.status(400).json({ error: 'already participating' })
