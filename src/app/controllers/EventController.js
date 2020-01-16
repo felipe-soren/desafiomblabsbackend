@@ -12,7 +12,10 @@ class EventController {
     if (req.query.city) {
       filters.city = new RegExp(req.query.city, 'i')
     }
-    console.log(filters)
+    if (req.query.type) {
+      filters.eventType = new RegExp(req.query.type, 'i')
+      console.log(filters)
+    }
     const events = await Event.paginate(filters, {
       page: req.query.page || 1,
       limit: 20,
@@ -42,8 +45,6 @@ class EventController {
     }
 
     let event = await Event.create({...req.body, organizer: req.userId})
-
-    event = await event.populate('organizer').execPopulate()
 
     res.json(event)
   } 

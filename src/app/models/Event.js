@@ -32,6 +32,11 @@ const EventSchema = new mongoose.Schema({
     ref: 'User',
     required: false
   }],
+  eventType: {
+    type: String,
+    required: true,
+    default: 'Free'
+  },
   numberOfParticipants: {
     type: Number,
     required: true
@@ -39,6 +44,10 @@ const EventSchema = new mongoose.Schema({
   urlImage: {
     type: String,
     required: true
+  },
+  price: {
+    type: Number,
+    required: false
   },
   date: {
     type: Date,
