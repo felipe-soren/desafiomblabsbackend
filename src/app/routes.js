@@ -17,6 +17,7 @@ routes.get('/events/:id', EventControler.show)
 routes.use(authMiddleaware)
 
 routes.get('/users', UserControler.show)
+routes.put('/users', UserControler.update)
 routes.post('/events', EventControler.store)
 routes.delete('/events/:id', EventControler.destroy)
 routes.put('/events/:id', EventControler.update)

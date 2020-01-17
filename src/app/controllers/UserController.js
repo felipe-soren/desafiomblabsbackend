@@ -17,6 +17,15 @@ class UserController{
     const user = await User.findById(req.userId).populate('attendedEvents')
     res.send(user)
   }
+
+  async update (req, res){
+    console.log(req.userId)
+    const user = await User.findByIdAndUpdate(req.userId, req.body, {
+      new: true
+    })
+    
+    res.send(user)
+  }
 }
 
 module.exports = new UserController()
